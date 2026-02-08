@@ -1,0 +1,289 @@
+@import 'tailwindcss';
+@plugin "@iconify/tailwind4";
+
+@plugin "flyonui" {
+  themes: all;
+}
+
+@import 'flyonui/variants.css';
+@source "../../node_modules/flyonui/flyonui.js";
+
+@source "../../html/**/*.html";
+@source "../json/**/*.json";
+
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto;
+}
+
+[data-theme='dark']
+  li:not(.menu-title, .menu-disabled)
+  > :not(ul, .menu-title, .collapse, .accordion-content, .btn).menu-active {
+  background-color: var(--color-primary);
+  color: var(--color-primary-content);
+}
+
+body {
+  color: color-mix(in oklab, var(--color-base-content) 80%, transparent);
+}
+
+/* tailwind intersect */
+@import 'tailwindcss-intersect';
+
+/* tailwind motion */
+@plugin "tailwindcss-motion";
+
+/* Flatpickr */
+@import 'flyonui/src/vendor/flatpickr.css';
+
+
+
+/* -------------------------------
+   Owner highlight box styles
+   ------------------------------- */
+.owner-box{
+  --size: 340px;
+  width: min(92%, var(--size));
+  aspect-ratio: 1/1;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.05)), #111214;
+  color: #fff;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 2px 6px rgba(0,0,0,0.5);
+  overflow: hidden;
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+  transition: transform .28s ease, box-shadow .28s ease;
+  margin: 0 auto;
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+.owner-box:hover{ transform: scale(1.03); box-shadow: 0 18px 50px rgba(0,0,0,0.7), 0 6px 16px rgba(0,0,0,0.6); }
+
+.owner-media{ flex:0 0 40%; min-width:40%; height:100%; background: linear-gradient(135deg, rgba(201,161,74,0.06), transparent); display:flex; align-items:center; justify-content:center; overflow:hidden; }
+.owner-media img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+.owner-box:hover .owner-media img{ transform:scale(1.05); }
+
+.owner-text{ padding:20px; display:flex; flex-direction:column; justify-content:center; gap:8px; flex:1; text-align:left; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.02)); }
+.owner-name{ margin:0; font-size:1.1rem; letter-spacing:0.02em; color:#c9a14a; font-weight:700; }
+.owner-goals{ margin:0; color:#bdbdbd; font-size:0.92rem; line-height:1.4; }
+
+@media (max-width:720px){
+  .owner-box{ flex-direction:column; width: min(96%, 420px); }
+  .owner-media{ flex: 0 0 45%; height:45%; min-height:150px; width:100%; }
+  .owner-text{ padding:16px; text-align:center; }
+  .owner-name{ font-size:1.05rem; }
+  .owner-goals{ font-size:0.95rem; }
+}
+
+/* ================================
+   Animation & Dynamics Styles
+   ================================ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Animation Classes */
+.animate-fade-in-up {
+  animation: fadeInUp 0.9s ease-out 0.1s both;
+}
+
+.animate-fade-in-left {
+  animation: fadeInLeft 0.9s ease-out 0.2s both;
+}
+
+.animate-fade-in-right {
+  animation: fadeInRight 0.9s ease-out 0.2s both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out 0.1s both;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.8s ease-out both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.8s ease-out both;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Enhanced card hover effects */
+.card {
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+}
+
+/* Button animations */
+.btn {
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Section fade-in effect */
+section {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Text animations */
+h1, h2, h3, h4, h5, h6 {
+  transition: color 0.3s ease;
+}
+
+p {
+  transition: color 0.3s ease;
+}
+
+/* Link hover effect */
+a {
+  transition: color 0.3s ease;
+}
+
+/* Image zoom on hover */
+img {
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced form elements */
+input, textarea, select {
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+input:focus, textarea:focus, select:focus {
+  transform: scale(1.02);
+}
+
+/* Badge & tag animations */
+.badge {
+  transition: all 0.3s ease;
+}
+
+.badge:hover {
+  transform: scale(1.1);
+}
+
+/* Gallery & Lightbox */
+.noir-gallery { display:grid; grid-template-columns: repeat(3,1fr); gap:12px; }
+.noir-gallery img { width:100%; height:120px; object-fit:cover; border-radius:10px; cursor:pointer; transition:transform .35s ease, box-shadow .35s ease; }
+.noir-gallery img:hover { transform:scale(1.04); box-shadow:0 12px 30px rgba(0,0,0,0.35); }
+
+.noir-lightbox { position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; }
+.noir-lightbox-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.65); }
+.noir-lightbox-content { position:relative; max-width:92%; max-height:92%; border-radius:12px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,0.6); }
+.noir-lightbox-content img { display:block; width:100%; height:auto; max-height:86vh; }
+.noir-lightbox-close { position:absolute; right:8px; top:8px; z-index:2; background:rgba(0,0,0,0.5); color:#fff; border:0; font-size:22px; width:38px; height:38px; border-radius:50%; cursor:pointer; }
+
+/* Smaller avatar/image utilities */
+.img-sm { width:14rem; height:14rem; }
+.img-xs { width:11rem; height:11rem; }
+
+@media (max-width:767px){
+  .noir-gallery { grid-template-columns: repeat(2,1fr); }
+  .img-sm { width:12rem; height:12rem; }
+  .img-xs { width:9rem; height:9rem; }
+}
+
